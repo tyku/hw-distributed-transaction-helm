@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: user-service
+  name: order-service
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
@@ -16,65 +16,5 @@ spec:
             backend:
               service:
                 name: user-service
-                port:
-                  number: 80
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: order-service
-  annotations:
-    kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-spec:
-  rules:
-    - host: arch.homework
-      http:
-        paths:
-          - path: /order(/|$)(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: order-service
-                port:
-                  number: 80
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: billing-service
-  annotations:
-    kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-spec:
-  rules:
-    - host: arch.homework
-      http:
-        paths:
-          - path: /billing(/|$)(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: billing-service
-                port:
-                  number: 80
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: notification-service
-  annotations:
-    kubernetes.io/ingress.class: "nginx"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-spec:
-  rules:
-    - host: arch.homework
-      http:
-        paths:
-          - path: /notification(/|$)(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: notification-service
                 port:
                   number: 80
