@@ -1,7 +1,7 @@
 serviceInstance:
-  nameOverride: notification-service
+  nameOverride: payment-service
   image:
-    repository: tyku/hw_stream_processing
+    repository: tyku/hw_distributed_transaction
     imagePullPolicy: Always
     tag: latest
   containerPort: 8000

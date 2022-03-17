@@ -1,5 +1,5 @@
 serviceInstance:
-  nameOverride: order-service
+  nameOverride: coordinator-service
   image:
     repository: tyku/hw_distributed_transaction
     imagePullPolicy: Always
