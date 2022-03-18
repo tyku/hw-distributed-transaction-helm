@@ -1,7 +1,7 @@
 serviceInstance:
   nameOverride: order-service
   image:
-    repository: tyku/hw_distributed_transaction
+    repository: tyku/hw-distributed-transaction
     imagePullPolicy: Always
     tag: latest
   containerPort: 8000

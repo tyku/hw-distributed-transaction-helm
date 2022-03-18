@@ -1,31 +1,38 @@
 # Homework stream-processing (Event-collaboration)
 
-## Install user service
-
-namespace default
-```bash
-helm install user ./app -f ./user-service/values.yaml
-```
-
 ## Install order service
 
 namespace default
 ```bash
-helm install user ./app -f ./order-service/values.yaml
+helm install order ./app -f ./order-service/values.yaml
 ```
 
-## Install billing service
+## Install payment service
 
 namespace default
 ```bash
-helm install user ./app -f ./billing-service/values.yaml
+helm install payment ./app -f ./payment-service/values.yaml
 ```
 
-## Install notification service
+## Install delivery service
 
 namespace default
 ```bash
-helm install user ./app -f ./notification-service/values.yaml
+helm install delivery ./app -f ./delivery-service/values.yaml
+```
+
+## Install warehouse service
+
+namespace default
+```bash
+helm install warehouse ./app -f ./warehouse-service/values.yaml
+```
+
+## Install coordinator service
+
+namespace default
+```bash
+helm install coordinator ./app -f ./coordinator-service/values.yaml
 ```
 
 ## Install Kafka
@@ -54,6 +61,11 @@ helm install --version "3.35.0" -n nginx-ingress -f ./nginx-ingress/nginx.yaml \
 ingress-nginx ingress-nginx/ingress-nginx
 ```
 
+```bash
+helm install -n nginx-ingress -f ./nginx-ingress/nginx.yaml \
+ingress-nginx ingress-nginx/ingress-nginx
+```
+
 Apply routes
 ```bash
 kubectl apply -f ./nginx-ingress/routes.yaml
@@ -64,10 +76,11 @@ minikube service -n nginx-ingress ingress-nginx-controller
 ## Uninstall
 
 ```bash
-helm un user
 helm un order
-helm un billing
-helm un notification
+helm un payment
+helm un delivery
+helm un warehouse
+helm un coordinator
 ```
 
 

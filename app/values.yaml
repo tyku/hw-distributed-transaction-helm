@@ -6,7 +6,7 @@ environment:
 applicationPort: 8000
 
 migration:
-  repository: tyku/hw_distributed_transaction
+  repository: tyku/hw-distributed-transaction
   imagePullPolicy: Always
   tag: latest
 
