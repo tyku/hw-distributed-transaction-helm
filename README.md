@@ -1,4 +1,4 @@
-# Homework stream-processing (Event-collaboration)
+# Homework distributed-transaction (2-phase commit)
 
 ## Install order service
 
