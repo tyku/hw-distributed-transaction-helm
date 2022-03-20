@@ -34,6 +34,8 @@ postgresql:
   postgresqlDatabase: myapp
   service:
     port: "5432"
+  postgresqlExtendedConf:
+    maxPreparedTransactions: 100
 
 kafka:
   enabled: true

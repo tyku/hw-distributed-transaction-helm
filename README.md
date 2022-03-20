@@ -91,7 +91,7 @@ brew install newman
 ```
 and run prepared test
 ```
-newman run ./hw_stream_processing.postman_collection.json
+newman run ./hw-distributed-transaction.postman_collection.json
 ```
 or import this file to postman, and start manually
 

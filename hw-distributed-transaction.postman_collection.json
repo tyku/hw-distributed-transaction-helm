@@ -1,0 +1,433 @@
+{
+	"info": {
+		"_postman_id": "c914e5f1-6aa8-4db3-b469-21cbe7beeb2a",
+		"name": "hw-distributed-transaction",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Make order. Reject result.  Price 100000",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody);",
+							"console.log(pm.response.json())",
+							"",
+							"pm.test(\"Test make order reject\", function() {",
+							"    var responseJSON = JSON.parse(responseBody);",
+							"    var coordinatorResult = responseJSON.coordinatorResult;",
+							"",
+							"    pm.expect(responseJSON['status']).eq('rejected');",
+							"    pm.expect(coordinatorResult.payment.status).eq('rejected');",
+							"    pm.expect(coordinatorResult.delivery.status).eq('done');",
+							"    pm.expect(coordinatorResult.warehouse.status).eq('done');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"product_id\": 1,\n    \"amount\": 1\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}/orders/v1/orders",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders",
+						"v1",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2. Make order. Done result.  Price 20000.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody);",
+							"console.log(pm.response.json())",
+							"",
+							"pm.test(\"Test make order reject\", function() {",
+							"    var responseJSON = JSON.parse(responseBody);",
+							"    var coordinatorResult = responseJSON.coordinatorResult;",
+							"",
+							"    pm.expect(responseJSON['status']).eq('done');",
+							"    pm.expect(coordinatorResult.payment.status).eq('done');",
+							"    pm.expect(coordinatorResult.delivery.status).eq('done');",
+							"    pm.expect(coordinatorResult.warehouse.status).eq('done');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"product_id\": 2,\n    \"amount\": 1\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}/orders/v1/orders",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders",
+						"v1",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. Make order. Reject result.  Price 20000. Repeat step 2. Product is out of stock.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody);",
+							"console.log(pm.response.json())",
+							"",
+							"pm.test(\"Test make order reject\", function() {",
+							"    var responseJSON = JSON.parse(responseBody);",
+							"    var coordinatorResult = responseJSON.coordinatorResult;",
+							"",
+							"    pm.expect(responseJSON['status']).eq('rejected');",
+							"    pm.expect(coordinatorResult.payment.status).eq('done');",
+							"    pm.expect(coordinatorResult.delivery.status).eq('done');",
+							"    pm.expect(coordinatorResult.warehouse.status).eq('rejected');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"product_id\": 2,\n    \"amount\": 1\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}/orders/v1/orders",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders",
+						"v1",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4. Make order. Done result.  Price 1000. Copy",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody);",
+							"console.log(pm.response.json())",
+							"",
+							"pm.test(\"Test make order reject\", function() {",
+							"    var responseJSON = JSON.parse(responseBody);",
+							"    var coordinatorResult = responseJSON.coordinatorResult;",
+							"",
+							"    pm.expect(responseJSON['status']).eq('done');",
+							"    pm.expect(coordinatorResult.payment.status).eq('done');",
+							"    pm.expect(coordinatorResult.delivery.status).eq('done');",
+							"    pm.expect(coordinatorResult.warehouse.status).eq('done');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"product_id\": 4,\n    \"amount\": 10\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}/orders/v1/orders",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders",
+						"v1",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5. Make order. Reject result.  Price 9100.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody);",
+							"console.log(pm.response.json())",
+							"",
+							"pm.test(\"Test make order reject\", function() {",
+							"    var responseJSON = JSON.parse(responseBody);",
+							"    var coordinatorResult = responseJSON.coordinatorResult;",
+							"",
+							"    pm.expect(responseJSON['status']).eq('rejected');",
+							"    pm.expect(coordinatorResult.payment.status).eq('done');",
+							"    pm.expect(coordinatorResult.delivery.status).eq('done');",
+							"    pm.expect(coordinatorResult.warehouse.status).eq('rejected');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"product_id\": 4,\n    \"amount\": 91\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}/orders/v1/orders",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders",
+						"v1",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6. Make order. Done result.  Price 9000.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody);",
+							"console.log(pm.response.json())",
+							"",
+							"pm.test(\"Test make order reject\", function() {",
+							"    var responseJSON = JSON.parse(responseBody);",
+							"    var coordinatorResult = responseJSON.coordinatorResult;",
+							"",
+							"    pm.expect(responseJSON['status']).eq('done');",
+							"    pm.expect(coordinatorResult.payment.status).eq('done');",
+							"    pm.expect(coordinatorResult.delivery.status).eq('done');",
+							"    pm.expect(coordinatorResult.warehouse.status).eq('done');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"product_id\": 4,\n    \"amount\": 90\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}/orders/v1/orders",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders",
+						"v1",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "arch.homework"
+		},
+		{
+			"key": "firstname1",
+			"value": ""
+		},
+		{
+			"key": "username1",
+			"value": ""
+		},
+		{
+			"key": "age1",
+			"value": ""
+		},
+		{
+			"key": "email1",
+			"value": ""
+		},
+		{
+			"key": "user_id1",
+			"value": ""
+		},
+		{
+			"key": "smallprice_id1",
+			"value": ""
+		},
+		{
+			"key": "bigprice_id1",
+			"value": ""
+		},
+		{
+			"key": "balance1",
+			"value": "0"
+		}
+	]
+}
